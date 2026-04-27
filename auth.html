@@ -1,0 +1,35 @@
+<section id="auth-view" class="page-view hidden-view flex-1 bg-slate-900">
+    <div class="flex flex-col lg:flex-row min-h-[calc(100vh-80px)] w-full">
+        <div class="w-full lg:w-5/12 bg-slate-900 flex flex-col justify-center items-center p-8 md:p-12 relative overflow-hidden text-center min-h-[300px]">
+            <div class="w-96 h-96 bg-primary/20 rounded-full absolute -top-20 -right-20 blur-3xl"></div>
+            <div class="w-96 h-96 bg-accent/10 rounded-full absolute -bottom-20 -left-20 blur-3xl"></div>
+            <div class="relative z-10">
+                <div class="w-20 h-20 md:w-32 md:h-32 bg-gradient-to-br from-primary to-primaryDark rounded-3xl flex items-center justify-center mx-auto mb-6 md:mb-8 shadow-glow rotate-12 border-4 border-yellow-200/20"><i class="ph-fill ph-pill text-4xl md:text-7xl text-slate-900 -rotate-12"></i></div>
+                <h1 class="text-3xl md:text-5xl font-black text-white mb-4 drop-shadow-md">الرعاية الفاخرة</h1>
+                <p class="text-primary font-bold text-base md:text-lg tracking-wide">تسوق بذكاء، ثقة، وسهولة</p>
+            </div>
+        </div>
+        <div class="w-full lg:w-7/12 bg-slate-50 flex items-center justify-center p-4 md:p-8 relative rounded-t-[3rem] lg:rounded-t-none lg:rounded-r-[4rem] flex-1">
+            <div class="w-full max-w-md bg-white p-6 md:p-10 rounded-3xl shadow-premium border border-slate-100">
+                <h2 class="text-2xl md:text-4xl font-black text-slate-900 mb-2" id="auth-title">تسجيل الدخول</h2>
+                <p class="text-slate-500 mb-6 md:mb-10 font-bold text-sm md:text-base" id="auth-subtitle">أدخل بياناتك للمتابعة بأمان</p>
+                <form id="login-form" class="space-y-4 md:space-y-5" onsubmit="handleLogin(event)">
+                    <div class="relative"><i class="ph-fill ph-phone absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i><input type="text" id="login-id" required class="input-modern pl-4 pr-12 py-3.5" placeholder="رقم الواتساب / كود الدخول"></div>
+                    <div class="relative"><i class="ph-fill ph-lock-key absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i><input type="password" id="login-password" required class="input-modern pl-4 pr-12 py-3.5" placeholder="كلمة المرور"></div>
+                    <button type="submit" class="btn-primary w-full mt-6 py-3.5 text-lg">دخول آمن للمنصة</button>
+                    <div class="text-center mt-6 pt-5 border-t border-slate-100"><button type="button" onclick="toggleAuthMode()" class="text-slate-900 text-sm md:text-base font-black hover:text-primary transition-colors">إنشاء حساب جديد</button></div>
+                </form>
+                <form id="register-form" class="space-y-4 md:space-y-5 hidden" onsubmit="handleRegister(event)">
+                    <div class="relative"><i class="ph-fill ph-user absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i><input type="text" id="reg-name" required class="input-modern pl-4 pr-12 py-3.5" placeholder="الاسم بالكامل"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="relative"><i class="ph-fill ph-whatsapp-logo absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i><input type="tel" id="reg-whatsapp" required class="input-modern pl-4 pr-12 py-3.5" placeholder="رقم الواتساب"></div>
+                        <div class="relative"><i class="ph-fill ph-lock-key absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i><input type="password" id="reg-password" required class="input-modern pl-4 pr-12 py-3.5" placeholder="كلمة المرور"></div>
+                    </div>
+                    <div class="relative"><i class="ph-fill ph-map-pin absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl"></i><input type="text" id="reg-address" required class="input-modern pl-4 pr-12 py-3.5" placeholder="العنوان بالتفصيل"></div>
+                    <button type="submit" class="btn-primary w-full mt-6 py-3.5 text-lg">تسجيل الحساب</button>
+                    <div class="text-center mt-6 pt-5 border-t border-slate-100"><button type="button" onclick="toggleAuthMode()" class="text-slate-900 text-sm md:text-base font-black hover:text-primary transition-colors">العودة لتسجيل الدخول</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

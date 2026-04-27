@@ -1,0 +1,73 @@
+<section id="client-catalog" class="page-view flex-1 p-3 md:p-6 lg:p-10 max-w-[1600px] mx-auto w-full">
+    <div id="banner-container-wrapper" class="relative w-full rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-premium border border-slate-100 mb-6 md:mb-10 bg-slate-950 hidden group" onmouseenter="pauseBanner()" onmouseleave="resumeBannerInterval()">
+        <div id="banners-track" class="slider-track h-48 sm:h-72 md:h-96 lg:h-[550px]"></div>
+        <button onclick="prevBanner()" class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 text-white rounded-full flex items-center justify-center hover:bg-primary hover:text-slate-900 z-30 opacity-0 group-hover:opacity-100 transition-all backdrop-blur-md border border-white/20"><i class="ph-bold ph-caret-left text-xl"></i></button>
+        <button onclick="nextBanner()" class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 text-white rounded-full flex items-center justify-center hover:bg-primary hover:text-slate-900 z-30 opacity-0 group-hover:opacity-100 transition-all backdrop-blur-md border border-white/20"><i class="ph-bold ph-caret-right text-xl"></i></button>
+        <div id="banner-dots" class="absolute bottom-4 left-0 right-0 flex justify-center gap-3 z-30"></div>
+    </div>
+    <div class="bg-white p-4 md:p-8 rounded-2xl md:rounded-[2.5rem] shadow-card border border-slate-100 mb-6 md:mb-10 z-20 relative">
+        <div class="flex flex-col md:flex-row gap-3 w-full max-w-4xl mx-auto mb-6 md:mb-8">
+            <div class="relative flex-1">
+                <i class="ph-bold ph-magnifying-glass absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 text-2xl"></i>
+                <input type="text" id="client-search" oninput="handleClientSearch()" class="w-full pl-5 pr-14 py-4 md:py-5 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-base md:text-lg font-black placeholder:font-bold text-slate-800" placeholder="ابحث عن رفاهيتك، براند، أو منتج...">
+            </div>
+            <button onclick="openAdvancedSearch()" class="px-6 py-4 md:py-5 bg-slate-900 text-white rounded-2xl font-black text-sm md:text-base hover:bg-primary hover:text-slate-900 transition-colors flex items-center justify-center gap-2 shrink-0">
+                <i class="ph-bold ph-faders text-xl"></i> بحث متقدم
+            </button>
+        </div>
+        <div class="flex gap-4 md:gap-6 overflow-x-auto hide-scroll pb-4 pt-2 items-start justify-start px-2" id="categories-container"></div>
+        <div id="brands-container" class="mt-4 md:mt-8 pt-4 md:pt-8 border-t border-slate-100 hidden">
+            <div class="flex items-center gap-2 mb-4 md:mb-6"><div class="w-2 h-8 bg-primary rounded-full"></div><h3 class="font-black text-slate-800 text-sm md:text-xl">اكتشف أرقى العلامات التجارية</h3></div>
+            <div class="flex gap-4 md:gap-6 overflow-x-auto hide-scroll pb-4 pt-2 items-start justify-start px-2" id="brands-grid"></div>
+        </div>
+        <div id="lines-container" class="mt-4 md:mt-8 pt-4 md:pt-8 border-t border-slate-100 hidden">
+            <div class="flex items-center gap-2 mb-4 md:mb-6"><div class="w-2 h-8 bg-slate-800 rounded-full"></div><h3 class="font-black text-slate-800 text-sm md:text-xl">مجموعات وفئات مختارة</h3></div>
+            <div class="flex gap-4 md:gap-6 overflow-x-auto hide-scroll pb-4 pt-2 items-start justify-start px-2" id="lines-grid"></div>
+        </div>
+    </div>
+    <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8 animate-fade-in mb-8 md:mb-12"></div>
+    <div id="load-more-container" class="text-center hidden pb-8"><button onclick="loadMoreClientProducts()" class="btn-dark mx-auto w-full md:w-auto px-10 py-3 shadow-lg rounded-2xl">عرض المزيد من المنتجات</button></div>
+</section>
+
+<section id="product-details-view" class="page-view hidden-view flex-1 p-4 md:p-10 max-w-[1400px] mx-auto w-full animate-fade-in bg-white rounded-t-3xl md:rounded-[3rem] mt-4 md:mt-10 shadow-premium border-t border-x md:border border-slate-100 relative">
+    <button onclick="navigate('client-catalog')" class="absolute top-4 left-4 md:top-8 md:left-8 z-40 w-10 h-10 md:w-14 md:h-14 bg-slate-100 text-slate-600 rounded-full flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors border border-slate-200 shadow-sm">
+        <i class="ph-bold ph-x text-lg md:text-2xl"></i>
+    </button>
+    <button onclick="navigate('client-catalog')" class="mb-6 md:mb-10 flex items-center gap-2 text-slate-500 hover:text-primary font-bold transition-colors text-sm md:text-lg w-fit bg-slate-50 px-4 py-2 rounded-xl hover:bg-slate-100"><i class="ph-bold ph-arrow-right"></i> العودة للمتجر</button>
+    <div class="flex flex-col lg:flex-row gap-6 md:gap-16 mb-8 md:mb-16">
+        <div class="w-full lg:w-1/2 flex flex-col gap-4 md:gap-6">
+            <div class="zoom-container w-full aspect-square bg-slate-50 rounded-2xl md:rounded-[2.5rem] p-6 flex items-center justify-center relative overflow-hidden border border-slate-100 group" onmousemove="handleImageZoom(event)" onmouseleave="resetImageZoom()">
+                <img id="pd-main-img" src="" class="zoom-image max-w-full max-h-full object-contain pointer-events-none mix-blend-multiply drop-shadow-2xl">
+                <button onclick="navigatePdImage(-1); event.stopPropagation();" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-white/80 backdrop-blur-md hover:bg-primary text-slate-900 rounded-full flex items-center justify-center shadow-lg transition-all border border-slate-200 opacity-0 group-hover:opacity-100"><i class="ph-bold ph-caret-right text-xl"></i></button>
+                <button onclick="navigatePdImage(1); event.stopPropagation();" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-white/80 backdrop-blur-md hover:bg-primary text-slate-900 rounded-full flex items-center justify-center shadow-lg transition-all border border-slate-200 opacity-0 group-hover:opacity-100"><i class="ph-bold ph-caret-left text-xl"></i></button>
+            </div>
+            <div id="pd-thumbnails" class="flex justify-center gap-3 md:gap-5 overflow-x-auto pb-2 hide-scroll"></div>
+        </div>
+        <div class="w-full lg:w-1/2 flex flex-col justify-center">
+            <div class="flex flex-wrap items-center gap-3 mb-4 md:mb-6">
+                <span id="pd-category-brand" class="text-xs md:text-sm font-black text-primary bg-primary/10 px-4 py-2 md:px-5 md:py-2.5 rounded-xl cursor-pointer hover:bg-primary hover:text-slate-900 transition-colors shadow-sm" onclick="setCategoryFilter(this.dataset.cat); navigate('client-catalog')"></span>
+                <div id="pd-availability-badge" class="hidden"><span class="bg-red-50 text-red-600 px-4 py-2 md:px-5 md:py-2.5 rounded-xl text-xs md:text-sm font-bold flex items-center gap-1.5 border border-red-100"><i class="ph-fill ph-warning-circle text-lg"></i> غير متوفر حالياً</span></div>
+            </div>
+            <h1 id="pd-title" class="text-2xl md:text-5xl font-black text-slate-900 mb-2 leading-tight tracking-tight"></h1>
+            <div id="pd-sub-cats" class="text-xs md:text-sm font-bold text-slate-400 mb-4 md:mb-8 flex flex-wrap gap-2"></div>
+            <div id="pd-offer-badge-container" class="hidden mb-4 md:mb-8"><span id="pd-offer-badge" class="bg-gradient-to-r from-accent to-orange-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-xl font-black text-xs md:text-base flex items-center gap-2 w-fit shadow-lg shadow-orange-500/20"><i class="ph-fill ph-fire text-xl animate-pulse"></i> <span id="pd-offer-text"></span></span></div>
+            <div class="flex items-end gap-2 md:gap-3 mb-6 md:mb-10"><span id="pd-price" class="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter"></span><span class="text-base md:text-2xl text-slate-500 font-bold mb-1.5 md:mb-2.5">ج.م</span></div>
+            <div id="pd-available-offers-container" class="hidden mb-6 md:mb-10 bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-100 p-4 md:p-6 rounded-2xl shadow-sm"><h3 class="font-black text-orange-800 mb-3 md:mb-5 flex items-center gap-2 text-sm md:text-lg"><i class="ph-fill ph-gift text-xl md:text-2xl"></i> عروض حصرية متاحة</h3><div id="pd-offers-list" class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4"></div></div>
+            <div id="pd-contains-container" class="mb-4 md:mb-6 hidden bg-blue-50 border border-blue-100 p-4 rounded-2xl">
+                <h4 class="font-black text-blue-800 text-sm flex items-center gap-2 mb-2"><i class="ph-bold ph-list-magnifying-glass"></i> يحتوي على:</h4>
+                <p id="pd-contains" class="text-blue-900 font-bold text-xs md:text-sm leading-relaxed"></p>
+            </div>
+            <div class="mb-8 md:mb-12"><h3 class="font-black text-slate-800 mb-3 text-base md:text-xl flex items-center gap-2"><div class="w-1.5 h-6 bg-slate-800 rounded-full"></div> تفاصيل المنتج</h3><p id="pd-desc" class="text-slate-600 leading-relaxed font-semibold text-sm md:text-lg whitespace-pre-line bg-slate-50 p-4 md:p-6 rounded-2xl border border-slate-100"></p></div>
+            <div class="flex flex-col sm:flex-row gap-3 md:gap-5 mt-auto">
+                <button id="pd-add-btn" class="btn-primary flex-1 py-4 text-base md:text-xl shadow-glow"><i class="ph-bold ph-shopping-cart-simple text-xl md:text-2xl"></i> أضف للسلة</button>
+                <button onclick="askAboutProductWhatsApp()" class="btn-dark sm:w-auto px-6 py-4 text-base md:text-xl border-none bg-gradient-to-r from-[#25D366] to-[#1ebd5a] hover:shadow-lg hover:shadow-[#25D366]/30 text-white"><i class="ph-fill ph-whatsapp-logo text-xl md:text-2xl"></i> استفسار</button>
+            </div>
+        </div>
+    </div>
+    <div class="border-t border-slate-100 pt-8 md:pt-16 mt-8 md:mt-16 mb-8"><div class="flex items-center gap-3 mb-6 md:mb-10"><div class="w-2 h-8 md:h-10 bg-primary rounded-full"></div><h3 class="text-xl md:text-3xl font-black text-slate-900">منتجات مشابهة قد تنال إعجابك</h3></div><div id="similar-products-grid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-6"></div></div>
+</section>
+
+<section id="client-moms-view" class="page-view hidden-view flex-1 p-4 md:p-10 max-w-[1400px] mx-auto w-full animate-fade-in">
+    <div class="bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-100 rounded-3xl md:rounded-[3rem] p-6 md:p-12 mb-8 md:mb-12 text-center relative overflow-hidden shadow-sm"><div class="absolute -right-10 -top-10 text-pink-200/50 mix-blend-multiply"><i class="ph-fill ph-baby text-[150px] md:text-[250px]"></i></div><div class="relative z-10"><h2 class="text-3xl md:text-6xl font-black text-pink-600 mb-3 md:mb-5 drop-shadow-sm">عالم الماميز</h2><p class="text-pink-800 font-bold text-sm md:text-xl max-w-3xl mx-auto leading-relaxed">كل ما يخص طفلك من نصائح، منتجات، وتحذيرات طبية متخصصة. لأننا نهتم بأغلى ما تملكين.</p></div></div>
+    <div id="moms-feed" class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10 mb-8"></div>
+</section>
